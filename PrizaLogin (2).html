@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Akun❤️</title>
+    <style>
+        body {
+            background: url('GGI.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .login-box {
+            background: skyblue;
+            padding: 30px;
+            border-radius: 10px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Login Untuk Masuk</h2>
+        
+        <div id="message" class="success"></div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Username" required>
+                <div id="userError" class="error"></div>
+            </div>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Password" required>
+                <div id="passError" class="error"></div>
+            </div>
+            
+            <button type="submit">OK</button>
+        </form>
+        
+        <p style="margin-top: 15px; font-size: 14px;">
+            <a href="#" style="color: #4CAF50;">Lupa password?</a>
+        </p>
+    </div>
+
+    <script>
+        // SET USERNAME DAN PASSWORD YANG BENAR DI SINI
+        const CORRECT_USERNAME = "#AKUDI6";
+        const CORRECT_PASSWORD = "#METAac";
+        
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            // Reset semua pesan error
+            document.getElementById('userError').style.display = 'none';
+            document.getElementById('passError').style.display = 'none';
+            document.getElementById('userError').textContent = '';
+            document.getElementById('passError').textContent = '';
+            document.getElementById('message').style.display = 'none';
+            
+            // Ambil nilai input
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            console.log("Username yang dimasukkan:", username);
+            console.log("Password yang dimasukkan:", password);
+            console.log("Username yang benar:", CORRECT_USERNAME);
+            console.log("Password yang benar:", CORRECT_PASSWORD);
+            
+            // Reset border
+            document.getElementById('username').style.borderColor = '#ddd';
+            document.getElementById('password').style.borderColor = '#ddd';
+            
+            // Validasi
+            let isValid = true;
+            
+            // Validasi Username
+            if (username !== CORRECT_USERNAME) {
+                document.getElementById('userError').textContent = 'Username salah!';
+                document.getElementById('userError').style.display = 'block';
+                document.getElementById('username').style.borderColor = 'red';
+                isValid = false;
+                console.log("Username SALAH");
+            } else {
+                console.log("Username BENAR");
+            }
+            
+            // Validasi Password
+            if (password !== CORRECT_PASSWORD) {
+                document.getElementById('passError').textContent = 'Password salah!';
+                document.getElementById('passError').style.display = 'block';
+                document.getElementById('password').style.borderColor = 'red';
+                isValid = false;
+                console.log("Password SALAH");
+            } else {
+                console.log("Password BENAR");
+            }
+            
+            // Jika semua benar
+            if (isValid) {
+                console.log("LOGIN BERHASIL!");
+                document.getElementById('message').textContent = 'Login berhasil!';
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('username').style.borderColor = 'green';
+                document.getElementById('password').style.borderColor = 'green';
+                
+                // Simpan di localStorage bahwa sudah login
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                // Redirect setelah 2 detik
+                setTimeout(function() {
+                    alert('Login berhasil, Code:AC76#$\nUsername: ' + username + '\nPassword : ' + password);
+                    // Jika mau redirect ke halaman lain:
+                    // window.location.href = "dashboard.html";
+                }, 2000);
+            } else {
+                document.getElementById('message').textContent = 'Login gagal!';
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').style.display = 'block';
+            }
+            
+            return false;
+        };
+    </script>
+</body>
+</html>
